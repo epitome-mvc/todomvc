@@ -41,9 +41,11 @@ define(function(require){
 		},
 
 		clear: function(event, context){
-			context.collection.forEach(function(item){
-				item.get('completed') && this.remove(item);
-			}, context.collection);
+			var completed = context.collection.filter(function(item){
+				return item.get('completed');
+			});
+
+			completed.length && context.collection.remove(completed);
 		}
 
 	});
