@@ -19,6 +19,7 @@ define(function(require){
 	var TodoCollection = require('collections/todo-collection'),
 		TodoList = require('views/todo-list-view'),
 		TodoNewItemView = require('views/todo-newitem-view'),
+		TodoStatsView = require('views/todo-stats-view'),
 		model = require('epik/model');
 
 	var todos = new TodoCollection(null, {
@@ -29,7 +30,7 @@ define(function(require){
 
 	var listview = new TodoList({
 		collection: todos,
-		element: '#todo-list'
+		element: '#main'
 	});
 
 	var newItem = new model();
@@ -41,6 +42,15 @@ define(function(require){
 			todos.add(newItem.toJSON());
 			newItem.destroy();
 		}
+	});
+
+	var statsview = new TodoStatsView({
+		collection: todos,
+		model: new model({
+			remaining: todos.filter(function(item){ return !item.get('completed')}).length,
+			completed: todos.filter(function(item){ return item.get('completed')}).length
+		}),
+		element: '#footer'
 	});
 
 });

@@ -24,13 +24,8 @@ define(function(require){
 			this.bindRivets(this);
 		},
 
-		edit: function(event, context){
-
-		},
-
-
 		keypress: function(event, context){
-			event && 13 == (event.charCode || event.keyCode) && this.blur();
+			event && 13 == (event.charCode || event.keyCode) && this.blur(), this.focus();
 		}
 
 	});

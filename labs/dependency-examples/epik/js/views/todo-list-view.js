@@ -15,16 +15,22 @@ define(function(require){
 
 		extend: view,
 
+		constructor: function(options){
+			this.parent('constructor', options);
+			this.resetToggler();
+		},
+
 		destroy: function(){
 			this.unbindRivets();
 			this.parent('destroy');
 		},
 
 		attachEvents: function(){
+			var self = this;
 			this.bindRivets(this);
 			this.collection.on('change add remove reset empty', function(){
-				console.log('changes?');
-				this.store();
+				self.collection.store();
+				self.resetToggler();
 			})
 		},
 
@@ -33,12 +39,24 @@ define(function(require){
 		},
 
 		remove: function(event, context){
-			var model = context.collection.getModelById(context.item.id);
-			model && context.collection.remove(model);
+			context.collection.remove(context.item);
 		},
 
 		keypress: function(event, context){
 			event && 13 == (event.charCode || event.keyCode) && this.blur();
+		},
+
+		resetToggler: function(){
+			this.toggleStatus = this.collection.every(function(item){
+				return item.get('completed');
+			})
+		},
+
+		toggler: function(element, context){
+			var type = !!element.currentTarget.checked;
+			context.collection.forEach(function(item){
+				item.set('completed', type);
+			});
 		}
 
 	});

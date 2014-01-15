@@ -17,22 +17,22 @@
 			/>
 		</header>
 		<section id="main">
-			<input id="toggle-all" type="checkbox">
+			<input id="toggle-all" type="checkbox" ep-on-change="toggler" ep-checked="toggleStatus"/>
 			<label for="toggle-all">Mark all as complete</label>
 			<ul id="todo-list" ep-each-item="collection#">
 				<li ep-class-editing="item.editing" data-id="{{item#id}}">
 					<div class="view">
-						<input class="toggle" type="checkbox" ep-checked="item.completed">
-						<label ep-text="item.title" ep-on-dblclick="edit"></label>
+						<input class="toggle" type="checkbox" ep-checked="item#completed">
+						<label ep-text="item#title" ep-on-dblclick="edit"></label>
 						<button class="destroy" ep-on-click="remove"></button>
 					</div>
-					<input class="edit" ep-value="item.title" ep-on-blur="edit" ep-on-keypress="keypress" autofocus/>
+					<input class="edit" ep-value="item#title" ep-on-blur="edit" ep-on-keypress="keypress" autofocus/>
 				</li>
 			</ul>
 		</section>
 		<footer id="footer">
 			<span id="todo-count">
-				<strong>{{stats#remaining}}</strong> item(s) left
+				<strong>{{model#remaining}}</strong> item(s) left
 			</span>
 			<ul id="filters">
 				<li>
@@ -45,7 +45,7 @@
 					<a href="#!/completed">Completed</a>
 				</li>
 			</ul>
-			<button ep-show="stats#completed" id="clear-completed">Clear completed ({{stats#completed}})</button>
+			<button ep-show="model#completed" ep-on-click="clear" id="clear-completed">Clear completed ({{model#completed}})</button>
 		</footer>
 	</section>
 	<footer id="info">

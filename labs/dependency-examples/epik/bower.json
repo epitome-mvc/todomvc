@@ -2,7 +2,7 @@
   "name": "todomvc-epik-requirejs",
   "version": "0.0.1",
   "dependencies": {
-    "epik": "0.2.1",
+    "epik": "0.2.3",
     "requirejs-text": "~2.0.10",
     "todomvc-common": "~0.1.9"
   }
