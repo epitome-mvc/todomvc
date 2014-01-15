@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" data-framework="epik">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>epik.js + RequireJS • TodoMVC</title>
+		<link rel="stylesheet" href="bower_components/todomvc-common/base.css">
+		<script src="bower_components/todomvc-common/base.js"></script>
+	</head>
+	<body>
+	<section id="todoapp">
+		<header id="header">
+			<h1>todos</h1>
+			<input id="new-todo" placeholder="What needs to be done?" autofocus
+					ep-value="model#title"
+					ep-on-keypress="keypress"
+			/>
+		</header>
+		<section id="main">
+			<input id="toggle-all" type="checkbox">
+			<label for="toggle-all">Mark all as complete</label>
+			<ul id="todo-list" ep-each-item="collection#">
+				<li ep-class-editing="item.editing" data-id="{{item#id}}">
+					<div class="view">
+						<input class="toggle" type="checkbox" ep-checked="item.completed">
+						<label ep-text="item.title" ep-on-dblclick="edit"></label>
+						<button class="destroy" ep-on-click="remove"></button>
+					</div>
+					<input class="edit" ep-value="item.title" ep-on-blur="edit" ep-on-keypress="keypress" autofocus/>
+				</li>
+			</ul>
+		</section>
+		<footer id="footer">
+			<span id="todo-count">
+				<strong>{{stats#remaining}}</strong> item(s) left
+			</span>
+			<ul id="filters">
+				<li>
+					<a class="selected" href="#!/">All</a>
+				</li>
+				<li>
+					<a href="#!/active">Active</a>
+				</li>
+				<li>
+					<a href="#!/completed">Completed</a>
+				</li>
+			</ul>
+			<button ep-show="stats#completed" id="clear-completed">Clear completed ({{stats#completed}})</button>
+		</footer>
+	</section>
+	<footer id="info">
+		<p>Double-click to edit a todo</p>
+		<p>Created by <a href="https://github.com/DimitarChristoff/">Dimitar Christoff</a></p>
+		<p>Powered by <a href="http://epitome-mvc.github.io/epik">epik</a></p>
+		<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+	</footer>
+	<script data-main="js/main" src="bower_components/requirejs/require.js"></script>
+	<script type="text/template" id="item-template">
+		<div class="view">
+			<input class="toggle" type="checkbox" <%=completedCheckbox%>>
+			<label><%-title%></label>
+			<button class="destroy"></button>
+		</div>
+		<input class="edit" value="<%=title%>">
+	</script>
+	<script type="text/template" id="stats-template">
+		<span id="todo-count">
+			<strong><%=remaining%></strong> item<% if (obj.remaining !== 1) { %>s<% } %> left
+		</span>
+		<ul id="filters">
+			<li>
+				<a class="selected" href="#!/">All</a>
+			</li>
+			<li>
+				<a href="#!/active">Active</a>
+			</li>
+			<li>
+				<a href="#!/completed">Completed</a>
+			</li>
+		</ul>
+		<% if (completed) { %>
+		<button id="clear-completed">Clear completed (<%=completed%>)</button>
+		<% } %>
+	</script>
+	</body>
+</html>
