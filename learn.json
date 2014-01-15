@@ -955,8 +955,8 @@
 	},
 	"epitome": {
 		"name": "Epitome",
-		"description": "Epitome is a new extensible and modular open-source MVC* framework, built out of MooTools Classes and Events.",
-		"homepage": "dimitarchristoff.github.io/Epitome",
+		"description": "Epitome is a extensible and modular open-source MVC* framework, built out of MooTools Classes and Events.",
+		"homepage": "epitome-mvc.github.io/Epitome",
 		"examples": [{
 			"name": "Architecture Example",
 			"url": "labs/architecture-examples/epitome"
@@ -965,7 +965,38 @@
 			"heading": "Official Resources",
 			"links": [{
 				"name": "API Reference",
-				"url": "http://dimitarchristoff.github.io/Epitome"
+				"url": "http://epitome-mvc.github.io/Epitome"
+			}, {
+				"name": "Examples",
+				"url": "http://epitome-mvc.github.io/Epitome/#examples"
+			}, {
+				"name": "Download & Building",
+				"url": "http://epitome-mvc.github.io/Epitome/#download-building"
+			}, {
+				"name": "Epitome on GitHub",
+				"url": "https://github.com/epitome-mvc/Epitome"
+			}]
+		}, {
+			"heading": "Community",
+			"links": [{
+				"name": "Epitome on Twitter",
+				"url": "http://twitter.com/D_mitar"
+			}]
+		}]
+	},
+	"epik": {
+		"name": "epik",
+		"description": "small modular mvc",
+		"homepage": "dimitarchristoff.github.io/epik",
+		"examples": [{
+			"name": "Architecture Example - AMD + rivets.js",
+			"url": "labs/dependency-examples/epik"
+		}],
+		"link_groups": [{
+			"heading": "Official Resources",
+			"links": [{
+				"name": "API Reference",
+				"url": "https://github.com/epitome-mvc/epik"
 			}, {
 				"name": "Examples",
 				"url": "http://dimitarchristoff.github.io/Epitome/#examples"
@@ -973,13 +1004,13 @@
 				"name": "Download & Building",
 				"url": "http://dimitarchristoff.github.io/Epitome/#download-building"
 			}, {
-				"name": "Epitome on GitHub",
-				"url": "https://github.com/DimitarChristoff/Epitome"
+				"name": "epik on GitHub",
+				"url": "https://github.com/epitome-mvc/epik"
 			}]
 		}, {
 			"heading": "Community",
 			"links": [{
-				"name": "Epitome on Twitter",
+				"name": "epik on Twitter",
 				"url": "http://twitter.com/D_mitar"
 			}]
 		}]
