@@ -987,7 +987,7 @@
 	"epik": {
 		"name": "epik",
 		"description": "small modular mvc",
-		"homepage": "dimitarchristoff.github.io/epik",
+		"homepage": "github.com/dimitarchristoff/epik",
 		"examples": [{
 			"name": "Architecture Example - AMD + rivets.js",
 			"url": "labs/dependency-examples/epik"
@@ -996,16 +996,16 @@
 			"heading": "Official Resources",
 			"links": [{
 				"name": "API Reference",
-				"url": "https://github.com/epitome-mvc/epik"
+				"url": "https://github.com/dimitarchristoff/epik"
 			}, {
 				"name": "Examples",
-				"url": "http://dimitarchristoff.github.io/Epitome/#examples"
+				"url": "http://fragged.org:8000/example"
 			}, {
 				"name": "Download & Building",
-				"url": "http://dimitarchristoff.github.io/Epitome/#download-building"
+				"url": "http://dimitarchristoff.github.io/epik/#download-building"
 			}, {
 				"name": "epik on GitHub",
-				"url": "https://github.com/epitome-mvc/epik"
+				"url": "https://github.com/dimitarchristoff/epik"
 			}]
 		}, {
 			"heading": "Community",
