@@ -20,7 +20,9 @@ define(function(require){
 		TodoList = require('views/todo-list-view'),
 		TodoNewItemView = require('views/todo-newitem-view'),
 		TodoStatsView = require('views/todo-stats-view'),
+		Router = require('routers/todo-router'),
 		model = require('epik/model');
+
 
 	var todos = new TodoCollection(null, {
 		id: 'todos'
@@ -35,22 +37,52 @@ define(function(require){
 
 	var newItem = new model();
 
-	var appview = new TodoNewItemView({
+	var itemsView = new TodoNewItemView({
+
 		model: newItem,
+
 		element: '#header',
+
 		'onModel:change:title': function(){
 			todos.add(newItem.toJSON());
 			newItem.destroy();
 		}
 	});
 
-	var statsview = new TodoStatsView({
+	var statsView = new TodoStatsView({
+
 		collection: todos,
+
 		model: new model({
 			remaining: todos.filter(function(item){ return !item.get('completed')}).length,
 			completed: todos.filter(function(item){ return item.get('completed')}).length
 		}),
+
 		element: '#footer'
+	});
+
+	var router = new Router({
+		routes: {
+			'': 'init',
+			'#!/': 'applyFilter',
+			'#!/:filter': 'applyFilter'
+		},
+
+		onInit: function() {
+			// we want to always have a state
+			this.navigate('#!/');
+		},
+
+		onApplyFilter: function(filter) {
+			// the filter is being used by the todo collection and view.
+			// when false, the whole collection is being passed.
+			todos.filters = ({
+				active: false,
+				completed: true
+			})[filter] || null;
+
+			this.showActiveFilter();
+		}
 	});
 
 });

@@ -17,6 +17,7 @@ define(function(require){
 
 		constructor: function(options){
 			this.parent('constructor', options);
+			this.collection.filters = true;
 			this.resetToggler();
 		},
 
@@ -26,12 +27,19 @@ define(function(require){
 		},
 
 		attachEvents: function(){
-			var self = this;
+			var collection = this.collection,
+				self = this;
+
+			this.rivets.formatters.filterMatch = function(value){
+				//console.log('here', collection, collection.filters, value);
+				return collection.filters == null || collection.filters === value;
+			};
 			this.bindRivets(this);
+
 			this.collection.on('change add remove reset empty', function(){
-				self.collection.store();
+				collection.store();
 				self.resetToggler();
-			})
+			});
 		},
 
 		edit: function(event, context){
@@ -49,7 +57,7 @@ define(function(require){
 		resetToggler: function(){
 			this.toggleStatus = this.collection.every(function(item){
 				return item.get('completed');
-			})
+			});
 		},
 
 		toggler: function(element, context){

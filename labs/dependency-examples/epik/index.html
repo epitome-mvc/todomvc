@@ -17,10 +17,10 @@
 			/>
 		</header>
 		<section id="main">
-			<input id="toggle-all" type="checkbox" ep-on-change="toggler" ep-checked="toggleStatus"/>
+			<input id="toggle-all" type="checkbox" ep-on-change="toggler" ep-checked="toggleStatus" ep-show="collection.length | gt 0"/>
 			<label for="toggle-all">Mark all as complete</label>
 			<ul id="todo-list" ep-each-item="collection#">
-				<li ep-class-editing="item.editing" data-id="{{item#id}}">
+				<li ep-class-editing="item.editing" data-id="{{item#id}}" ep-show="item#completed | filterMatch">
 					<div class="view">
 						<input class="toggle" type="checkbox" ep-checked="item#completed">
 						<label ep-text="item#title" ep-on-dblclick="edit"></label>
@@ -55,32 +55,5 @@
 		<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
 	</footer>
 	<script data-main="js/main" src="bower_components/requirejs/require.js"></script>
-	<script type="text/template" id="item-template">
-		<div class="view">
-			<input class="toggle" type="checkbox" <%=completedCheckbox%>>
-			<label><%-title%></label>
-			<button class="destroy"></button>
-		</div>
-		<input class="edit" value="<%=title%>">
-	</script>
-	<script type="text/template" id="stats-template">
-		<span id="todo-count">
-			<strong><%=remaining%></strong> item<% if (obj.remaining !== 1) { %>s<% } %> left
-		</span>
-		<ul id="filters">
-			<li>
-				<a class="selected" href="#!/">All</a>
-			</li>
-			<li>
-				<a href="#!/active">Active</a>
-			</li>
-			<li>
-				<a href="#!/completed">Completed</a>
-			</li>
-		</ul>
-		<% if (completed) { %>
-		<button id="clear-completed">Clear completed (<%=completed%>)</button>
-		<% } %>
-	</script>
 	</body>
 </html>

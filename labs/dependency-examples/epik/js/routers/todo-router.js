@@ -12,8 +12,9 @@ define(function(require){
 		showActiveFilter: function(){
 			// fix up the links for current filter
 			var self = this;
-			jQuery('#filters li a').each(function(link){
-				link.set('class', link.get('href') === self.req ? 'selected' : '');
+			jQuery('#filters li a').each(function(i, $link){
+				$link = jQuery($link);
+				$link.attr('class', $link.attr('href') === self.req ? 'selected' : '');
 			});
 		}
 	});

@@ -18,18 +18,7 @@ define(function(require){
 		implement: [storage.sessionStorage()],
 
 		// base model class prototype
-		model: model,
-
-		map: {
-			active: 0,
-			completed: 1
-		},
-
-		todoFilter: function (model) {
-			// references the filterType which the controller sets
-			return this.filterType === false ? true : this.map[this.filterType] === +model.get('completed');
-		}
-
+		model: model
 	});
 
 });
