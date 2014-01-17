@@ -8,8 +8,8 @@ require.config({
 		jquery: '../bower_components/jquery/jquery',
 		'rivets-adapter': 'epik/plugins/rivets-adapter',
 		text: '../bower_components/requirejs-text/text'
-	},
-	urlArgs: 'b=' + +new Date
+	}
+	//urlArgs: 'b=' + +new Date
 });
 
 
