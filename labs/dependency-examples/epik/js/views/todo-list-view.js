@@ -17,7 +17,6 @@ define(function(require){
 
 		constructor: function(options){
 			this.parent('constructor', options);
-			this.collection.filters = true;
 			this.resetToggler();
 		},
 
@@ -30,13 +29,16 @@ define(function(require){
 			var collection = this.collection,
 				self = this;
 
-			this.rivets.formatters.filterMatch = function(value){
-				//console.log('here', collection, collection.filters, value);
-				return collection.filters == null || collection.filters === value;
+			// filter works through collection
+			this.rivets.formatters.filter = function(items){
+				return collection.filters == null ? items : items.filter(function(item){
+					return collection.filters === item.get('completed');
+				});
 			};
+
 			this.bindRivets(this);
 
-			this.collection.on('change add remove reset empty', function(){
+			collection.on('change add remove reset empty sort', function(){
 				collection.store();
 				self.resetToggler();
 			});
@@ -50,7 +52,7 @@ define(function(require){
 			context.collection.remove(context.item);
 		},
 
-		keypress: function(event, context){
+		keypress: function(event){
 			event && 13 == (event.charCode || event.keyCode) && this.blur();
 		},
 

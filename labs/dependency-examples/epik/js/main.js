@@ -23,32 +23,35 @@ define(function(require){
 		Router = require('routers/todo-router'),
 		model = require('epik/model');
 
-
+	// collection of views
 	var todos = new TodoCollection(null, {
 		id: 'todos'
 	});
 
-	todos.set(todos.retrieve() || []);
+	// main list of items view
+	var listView = new TodoList({
 
-	var listview = new TodoList({
 		collection: todos,
+
 		element: '#main'
+
 	});
 
-	var newItem = new model();
+	// add new item micro view
+	new TodoNewItemView({
 
-	var itemsView = new TodoNewItemView({
-
-		model: newItem,
+		model: new model(),
 
 		element: '#header',
 
 		'onModel:change:title': function(){
-			todos.add(newItem.toJSON());
-			newItem.destroy();
+			todos.add(this.model.toJSON());
+			this.model.destroy();
 		}
+
 	});
 
+	// footer stats view
 	var statsView = new TodoStatsView({
 
 		collection: todos,
@@ -61,6 +64,7 @@ define(function(require){
 		element: '#footer'
 	});
 
+	// listen to route changes
 	var router = new Router({
 		routes: {
 			'': 'init',
@@ -69,19 +73,20 @@ define(function(require){
 		},
 
 		onInit: function() {
-			// we want to always have a state
-			this.navigate('#!/');
+			// we may want to always have a state
+			// this.navigate('#!/');
 		},
 
 		onApplyFilter: function(filter) {
 			// the filter is being used by the todo collection and view.
 			// when false, the whole collection is being passed.
-			todos.filters = ({
-				active: false,
-				completed: true
-			})[filter] || null;
+			todos.filters = filter in this.map ? this.map[filter] : null;
 
-			this.showActiveFilter();
+			// need to manually force this because of the filter
+			listView.syncRivets();
+
+			// also let status know to show current.
+			statsView.showCurrent(filter);
 		}
 	});
 

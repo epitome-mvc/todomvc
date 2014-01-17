@@ -5,6 +5,15 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>epik.js + RequireJS • TodoMVC</title>
 		<link rel="stylesheet" href="bower_components/todomvc-common/base.css">
+		<style>
+			.active li.completed {
+				display: none;
+			}
+
+			.completed li.active {
+				display: none;
+			}
+		</style>
 		<script src="bower_components/todomvc-common/base.js"></script>
 	</head>
 	<body>
@@ -17,10 +26,10 @@
 			/>
 		</header>
 		<section id="main">
-			<input id="toggle-all" type="checkbox" ep-on-change="toggler" ep-checked="toggleStatus" ep-show="collection.length | gt 0"/>
+			<input id="toggle-all" type="checkbox" ep-on-change="toggler" ep-checked="toggleStatus" ep-show="collection.length"/>
 			<label for="toggle-all">Mark all as complete</label>
-			<ul id="todo-list" ep-each-item="collection#">
-				<li ep-class-editing="item.editing" data-id="{{item#id}}" ep-show="item#completed | filterMatch">
+			<ul id="todo-list" sep-class="filters.type">
+				<li ep-each-item="collection# | filter" ep-class-editing="item.editing">
 					<div class="view">
 						<input class="toggle" type="checkbox" ep-checked="item#completed">
 						<label ep-text="item#title" ep-on-dblclick="edit"></label>
@@ -32,17 +41,17 @@
 		</section>
 		<footer id="footer">
 			<span id="todo-count">
-				<strong>{{model#remaining}}</strong> item(s) left
+				<strong>{{model#remaining}}</strong> item{{model#remaining | plural}} left
 			</span>
 			<ul id="filters">
 				<li>
-					<a class="selected" href="#!/">All</a>
+					<a class="all selected" href="#!/">All</a>
 				</li>
 				<li>
-					<a href="#!/active">Active</a>
+					<a class="active" href="#!/active">Active</a>
 				</li>
 				<li>
-					<a href="#!/completed">Completed</a>
+					<a class="completed" href="#!/completed">Completed</a>
 				</li>
 			</ul>
 			<button ep-show="model#completed" ep-on-click="clear" id="clear-completed">Clear completed ({{model#completed}})</button>

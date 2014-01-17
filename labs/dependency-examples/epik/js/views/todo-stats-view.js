@@ -15,6 +15,10 @@ define(function(require){
 
 		extend: view,
 
+		map: {
+
+		},
+
 		constructor: function(options){
 			this.parent('constructor', options)
 		},
@@ -26,6 +30,10 @@ define(function(require){
 
 		attachEvents: function(){
 			var model = this.model;
+
+			this.rivets.formatters.plural = function(value){
+				return value == 1 ? '' : 's';
+			};
 
 			this.bindRivets(this);
 			this.collection.on('change reset', function(){
@@ -46,6 +54,12 @@ define(function(require){
 			});
 
 			completed.length && context.collection.remove(completed);
+		},
+
+		showCurrent: function(item){
+			item || (item = 'all');
+			this.$element.find('a.selected').removeClass('selected');
+			this.$element.find('a.' + item).addClass('selected');
 		}
 
 	});

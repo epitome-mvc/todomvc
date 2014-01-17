@@ -10,15 +10,22 @@ define(function(require){
 	/**
 	 * @description collection of todo models.
 	 */
-	return primish({
+	return primish('todos', {
 
 		extend: collection,
 
 		// enable storage methods, namespaced as collection.
-		implement: [storage.sessionStorage()],
+		implement: [storage.localStorage()],
 
 		// base model class prototype
-		model: model
+		model: model,
+
+		constructor: function(models, options){
+			this.filters = null;
+			this.parent('constructor', models, options);
+			var data = this.retrieve();
+			data && this.set(data);
+		}
 	});
 
 });
