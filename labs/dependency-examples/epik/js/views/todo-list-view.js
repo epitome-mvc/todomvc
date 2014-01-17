@@ -38,6 +38,10 @@ define(function(require){
 
 			this.bindRivets(this);
 
+			collection.on('change:title', function(model, newTitle){
+				newTitle || this.remove(model);
+			});
+
 			collection.on('change add remove reset empty sort', function(){
 				collection.store();
 				self.resetToggler();
