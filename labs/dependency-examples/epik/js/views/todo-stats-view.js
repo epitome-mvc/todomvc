@@ -4,7 +4,8 @@ define(function(require){
 	var epik = require('epik/index'),
 		primish = epik.primish,
 		view = require('epik/view'),
-		rivets = require('epik/plugins/rivets-adapter');
+		rivets = require('epik/plugins/rivets-adapter'),
+		template = require('text!../../templates/stats-view.tpl');
 
 	/**
 	 * @description todo model defaults.
@@ -15,12 +16,16 @@ define(function(require){
 
 		extend: view,
 
+		options: {
+			template: template
+		},
+
 		map: {
 
 		},
 
 		constructor: function(options){
-			this.parent('constructor', options)
+			this.parent('constructor', options);
 		},
 
 		destroy: function(){
@@ -30,6 +35,8 @@ define(function(require){
 
 		attachEvents: function(){
 			var model = this.model;
+			this.$element.html(this.options.template);
+
 
 			this.rivets.formatters.plural = function(value){
 				return value == 1 ? '' : 's';

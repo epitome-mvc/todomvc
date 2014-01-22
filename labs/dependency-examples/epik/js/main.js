@@ -9,7 +9,7 @@ require.config({
 		jquery: '../bower_components/jquery/jquery',
 		text: '../bower_components/requirejs-text/text'
 	},
-	bundlesss: {
+	bundles: {
 		'epik/epik-min': [
 			'epik/index',
 			'epik/model',
@@ -30,8 +30,6 @@ require.config({
 
 define(function(require){
 	'use strict';
-
-	require('epik/epik-min');
 
 	var TodoCollection = require('collections/todo-collection'),
 		TodoList = require('views/todo-list-view'),
