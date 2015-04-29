@@ -2,6 +2,16 @@
 'use strict';
 
 TodoMVC.module('Layout', function (Layout, App, Backbone) {
+
+	Layout.Root = Backbone.Marionette.LayoutView.extend({
+		el: '#todoapp',
+		regions: {
+			header: '#header',
+			main: '#main',
+			footer: '#footer'
+		}
+	});
+
 	// Layout Header View
 	// ------------------
 	Layout.Header = Backbone.Marionette.ItemView.extend({
@@ -14,7 +24,18 @@ TodoMVC.module('Layout', function (Layout, App, Backbone) {
 		},
 
 		events: {
-			'keypress @ui.input': 'onInputKeypress'
+			'keypress @ui.input': 'onInputKeypress',
+			'keyup @ui.input': 'onInputKeyup'
+		},
+
+		// According to the spec
+		// If escape is pressed during the edit, the edit state should be left and any changes be discarded.
+		onInputKeyup: function (e) {
+			var ESC_KEY = 27;
+
+			if (e.which === ESC_KEY) {
+				this.render();
+			}
 		},
 
 		onInputKeypress: function (e) {

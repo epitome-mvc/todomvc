@@ -262,12 +262,10 @@ module.exports.todoMVCTest = function (frameworkName, baseUrl, speedMode, laxMod
 
 
 		test.describe('Clear completed button', function () {
-			test.it('should display the number of completed items', function () {
+			test.it('should display the correct text', function () {
 				createStandardItems();
 				page.toggleItemAtIndex(1);
-				testOps.assertClearCompleteButtonText('Clear completed (1)');
-				page.toggleItemAtIndex(2);
-				testOps.assertClearCompleteButtonText('Clear completed (2)');
+				testOps.assertClearCompleteButtonText('Clear completed');
 			});
 
 			test.it('should remove completed items when clicked', function () {
@@ -287,7 +285,7 @@ module.exports.todoMVCTest = function (frameworkName, baseUrl, speedMode, laxMod
 			});
 		});
 
-		/*test.describe('Persistence', function () {
+		test.describe('Persistence', function () {
 			test.it('should persist its data', function () {
 				// set up state
 				page.enterItem(TODO_ITEM_ONE);
@@ -304,13 +302,13 @@ module.exports.todoMVCTest = function (frameworkName, baseUrl, speedMode, laxMod
 				stateTest();
 
 				// navigate away and back again
-				browser.get(otherUrl);
+				browser.get('about:blank');
 				browser.get(baseUrl);
 
 				// repeat the state test
 				stateTest();
 			});
-		});*/
+		});
 
 		test.describe('Routing', function () {
 			test.it('should allow me to display active items', function () {

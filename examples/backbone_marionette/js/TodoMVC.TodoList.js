@@ -34,18 +34,18 @@ TodoMVC.module('TodoList', function (TodoList, App, Backbone, Marionette) {
 			var header = new App.Layout.Header({
 				collection: todoList
 			});
-			App.header.show(header);
+			App.root.showChildView('header', header);
 		},
 
 		showFooter: function (todoList) {
 			var footer = new App.Layout.Footer({
 				collection: todoList
 			});
-			App.footer.show(footer);
+			App.root.showChildView('footer', footer);
 		},
 
 		showTodoList: function (todoList) {
-			App.main.show(new TodoList.Views.ListView({
+			App.root.showChildView('main', new TodoList.Views.ListView({
 				collection: todoList
 			}));
 		},
@@ -57,13 +57,13 @@ TodoMVC.module('TodoList', function (TodoList, App, Backbone, Marionette) {
 		}
 	});
 
-	// TodoList Initializer
+	// On App start
 	// --------------------
 	//
 	// Get the TodoList up and running by initializing the mediator
 	// when the the application is started, pulling in all of the
 	// existing Todo items and displaying them.
-	TodoList.addInitializer(function () {
+	App.on('start', function () {
 		var controller = new TodoList.Controller();
 		controller.router = new TodoList.Router({
 			controller: controller
